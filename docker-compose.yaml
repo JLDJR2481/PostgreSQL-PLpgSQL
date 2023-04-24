@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  database:
+    image: postgres:15.2-bullseye
+    container_name: postgresql_compose
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: user
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database/data:/var/lib/postgresql/data
+      - ./database/schemas:/docker-entrypoint-initdb.d
