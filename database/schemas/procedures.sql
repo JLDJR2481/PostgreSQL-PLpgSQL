@@ -34,6 +34,17 @@ BEGIN
     WHERE id_airline = p_id_airline;
 END;$$;
 
+-- Delete
+CREATE OR REPLACE PROCEDURE delete_airline(
+    p_id_airline INTEGER
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  DELETE FROM airlines
+  WHERE id_airline = p_id_airline;
+END;$$;
+
 -- -----------------------------------------------------
 -- Table "planes"
 -- -----------------------------------------------------
@@ -70,6 +81,17 @@ BEGIN
     WHERE id_plane = p_id_plane;
 END;$$;
 
+-- Delete
+CREATE OR REPLACE PROCEDURE delete_plane(
+    p_id_plane INTEGER
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  DELETE FROM planes
+  WHERE id_plane = p_id_plane;
+END;$$;
+
 -- -----------------------------------------------------
 -- Table "suppliers"
 -- -----------------------------------------------------
@@ -100,6 +122,17 @@ BEGIN
         name = p_name,
         company = p_company
     WHERE id_supplier = p_id_supplier;
+END;$$;
+
+-- Delete
+CREATE OR REPLACE PROCEDURE delete_supplier(
+    p_id_supplier INTEGER
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  DELETE FROM suppliers
+  WHERE id_supplier = p_id_supplier;
 END;$$;
 
 -- -----------------------------------------------------
@@ -137,6 +170,17 @@ BEGIN
     WHERE id_shop = p_id_shop;
 END;$$;
 
+-- Delete
+CREATE OR REPLACE PROCEDURE delete_shop(
+    p_id_shop INTEGER
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  DELETE FROM shops
+  WHERE id_shop = p_id_shop;
+END;$$;
+
 -- -----------------------------------------------------
 -- Table "occupations"
 -- -----------------------------------------------------
@@ -164,6 +208,17 @@ BEGIN
     UPDATE occupations SET
         name = p_name
     WHERE id_occu = p_id_occu;
+END;$$;
+
+-- Delete
+CREATE OR REPLACE PROCEDURE delete_occupation(
+    p_id_occu VARCHAR(10)
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  DELETE FROM occupations
+  WHERE id_occu = p_id_occu;
 END;$$;
 
 -- -----------------------------------------------------
@@ -211,6 +266,17 @@ BEGIN
     WHERE id_emp = p_id_emp;
 END;$$;
 
+-- Delete
+CREATE OR REPLACE PROCEDURE delete_staff(
+    p_id_emp INTEGER
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  DELETE FROM staff
+  WHERE id_emp = p_id_emp;
+END;$$;
+
 -- -----------------------------------------------------
 -- Table "flights"
 -- -----------------------------------------------------
@@ -251,4 +317,15 @@ BEGIN
         origin = p_origin,
         destination = p_destination
     WHERE id_flight = p_id_flight;
+END;$$;
+
+-- Delete
+CREATE OR REPLACE PROCEDURE delete_flight(
+    p_id_flight VARCHAR(10)
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  DELETE FROM flights
+  WHERE id_flight = p_id_flight;
 END;$$;
