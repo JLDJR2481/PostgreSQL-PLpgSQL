@@ -4,6 +4,8 @@
 -- -----------------------------------------------------
 -- Table "airlines"
 -- -----------------------------------------------------
+
+-- Insert
 CREATE OR REPLACE PROCEDURE insert_airline (
     p_id_airline INTEGER,
     p_name VARCHAR(45),
@@ -17,9 +19,26 @@ BEGIN
     COMMIT;
 END;$$;
 
+-- Update
+CREATE OR REPLACE PROCEDURE update_airline (
+    p_id_airline INTEGER,
+    p_name VARCHAR(45),
+    p_num_emp INTEGER
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    UPDATE airlines SET
+        name = p_name,
+        num_emp = p_num_emp
+    WHERE id_airline = p_id_airline;
+END;$$;
+
 -- -----------------------------------------------------
 -- Table "planes"
 -- -----------------------------------------------------
+
+-- Insert
 CREATE OR REPLACE PROCEDURE insert_plane (
     p_id_plane INTEGER,
     p_model VARCHAR(45),
@@ -34,11 +53,30 @@ BEGIN
     COMMIT;
 END;$$;
 
+-- Update
+CREATE OR REPLACE PROCEDURE update_plane (
+    p_id_plane INTEGER,
+    p_model VARCHAR(45),
+    p_capacity INTEGER,
+    p_id_airline INTEGER
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    UPDATE planes SET
+        model = p_model,
+        capacity = p_capacity,
+        id_airline = p_id_airline
+    WHERE id_plane = p_id_plane;
+END;$$;
+
 -- -----------------------------------------------------
 -- Table "suppliers"
 -- -----------------------------------------------------
+
+-- Insert
 CREATE OR REPLACE PROCEDURE insert_supplier (
-    p_id INTEGER,
+    p_id_supplier INTEGER,
     p_name VARCHAR(45),
     p_company VARCHAR(45)
 )
@@ -46,12 +84,29 @@ LANGUAGE plpgsql
 AS $$
 BEGIN
     INSERT INTO suppliers (id_supplier, name, company)
-    VALUES (p_id, p_name, p_company);
+    VALUES (p_id_supplier, p_name, p_company);
+END;$$;
+
+-- Update
+CREATE OR REPLACE PROCEDURE update_supplier (
+    p_id_supplier INTEGER,
+    p_name VARCHAR(45),
+    p_company VARCHAR(45)
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    UPDATE suppliers SET
+        name = p_name,
+        company = p_company
+    WHERE id_supplier = p_id_supplier;
 END;$$;
 
 -- -----------------------------------------------------
 -- Table "shops"
 -- -----------------------------------------------------
+
+-- Insert
 CREATE OR REPLACE PROCEDURE insert_shop (
     p_id_shop INTEGER,
     p_name VARCHAR(45),
@@ -65,10 +120,29 @@ BEGIN
     VALUES (p_id_shop, p_name, p_num_emp, p_id_supplier);
 END;$$;
 
+-- Update
+CREATE OR REPLACE PROCEDURE update_shop (
+    p_id_shop INTEGER,
+    p_name VARCHAR(45),
+    p_num_emp INTEGER,
+    p_id_supplier INTEGER
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    UPDATE shops SET
+        name = p_name,
+        num_emp = p_num_emp,
+        id_supplier = p_id_supplier
+    WHERE id_shop = p_id_shop;
+END;$$;
+
 -- -----------------------------------------------------
 -- Table "occupations"
 -- -----------------------------------------------------
-CREATE OR REPLACE PROCEDURE insert_occupation(
+
+-- Insert
+CREATE OR REPLACE PROCEDURE insert_occupation (
     p_id_occu VARCHAR(10),
     p_name VARCHAR(45)
 )
@@ -79,9 +153,24 @@ BEGIN
     VALUES (p_id_occu, p_name);
 END;$$;
 
+-- Update
+CREATE OR REPLACE PROCEDURE update_occupation (
+    p_id_occu VARCHAR(10),
+    p_name VARCHAR(45)
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    UPDATE occupations SET
+        name = p_name
+    WHERE id_occu = p_id_occu;
+END;$$;
+
 -- -----------------------------------------------------
 -- Table "staff"
 -- -----------------------------------------------------
+
+-- Insert
 CREATE OR REPLACE PROCEDURE insert_staff (
     p_id_emp INTEGER,
     p_name VARCHAR(45),
@@ -99,9 +188,34 @@ BEGIN
     COMMIT;
 END;$$;
 
+-- Update
+CREATE OR REPLACE PROCEDURE update_staff (
+    p_id_emp INTEGER,
+    p_name VARCHAR(45),
+    p_surname VARCHAR(45),
+    p_id_occu VARCHAR(10),
+    p_salary INTEGER,
+    p_id_shop INTEGER,
+    p_id_airline INTEGER
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    UPDATE staff SET 
+        name = p_name,
+        surname = p_surname,
+        id_occu = p_id_occu,
+        salary = p_salary,
+        id_shop = p_id_shop,
+        id_airline = p_id_airline
+    WHERE id_emp = p_id_emp;
+END;$$;
+
 -- -----------------------------------------------------
 -- Table "flights"
 -- -----------------------------------------------------
+
+-- Insert
 CREATE OR REPLACE PROCEDURE insert_flight (
     p_id_flight VARCHAR(10),
     p_id_airline INT,
@@ -116,4 +230,25 @@ BEGIN
     INSERT INTO flights (id_flight, id_airline, id_plane, date_time, origin, destination)
     VALUES (p_id_flight, p_id_airline, p_id_plane, p_date_time, p_origin, p_destination);
     COMMIT;
+END;$$;
+
+-- Update
+CREATE OR REPLACE PROCEDURE update_flight (
+    p_id_flight VARCHAR(10),
+    p_id_airline INT,
+    p_id_plane INT,
+    p_date_time TIMESTAMP,
+    p_origin VARCHAR(45),
+    p_destination VARCHAR(45)
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    UPDATE flights SET
+        id_airline = p_id_airline,
+        id_plane = p_id_plane,
+        date_time = p_date_time,
+        origin = p_origin,
+        destination = p_destination
+    WHERE id_flight = p_id_flight;
 END;$$;
