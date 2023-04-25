@@ -1,3 +1,6 @@
+-- Connecting to database
+\c airport
+
 -- Inserting values for airlines table 
 INSERT INTO airlines VALUES
 (1, 'Vueling', 400),
