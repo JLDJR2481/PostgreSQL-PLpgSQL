@@ -23,7 +23,8 @@ BEGIN
     SELECT name
     FROM airlines
     WHERE num_emp >= min_employees;
-END;$$;
+END;
+$$;
 
 -- To prove it --
 SELECT * FROM get_large_airlines_name(400);
@@ -53,6 +54,7 @@ $$;
 
 -- To prove it:
 SELECT * FROM get_larger_airlines_data(400);
+
 
 -- -----------------------------------------------------
 -- flights table
@@ -183,6 +185,7 @@ SELECT * FROM get_shops_by_range(10,40);
 --  suppliers table
 -- -----------------------------------------------------
 
+
 DROP FUNCTION IF EXISTS get_initial_j_name;
 
 CREATE OR REPLACE FUNCTION get_initial_j_name()
@@ -203,3 +206,148 @@ SELECT * FROM get_initial_j_name();
 SELECT supplier_id, supplier_name FROM get_initial_j_name();
 
 SELECT get_initial_j_name();
+
+-- Get data from tables --
+-- Dropping all get_data functions
+DROP FUNCTION IF EXISTS get_data_airlines;
+DROP FUNCTION IF EXISTS get_data_flights;
+DROP FUNCTION IF EXISTS get_data_occupations;
+DROP FUNCTION IF EXISTS get_data_planes;
+DROP FUNCTION IF EXISTS get_data_shops;
+DROP FUNCTION IF EXISTS get_data_staff;
+DROP FUNCTION IF EXISTS get_data_suppliers;
+
+-- airlines table --
+CREATE OR REPLACE FUNCTION get_data_airlines()
+RETURNS TABLE (
+    id_airline INT, 
+    name VARCHAR(45), 
+    num_emp INT
+) 
+AS $$
+BEGIN
+    RETURN QUERY EXECUTE 'SELECT * FROM airlines;';
+END;
+$$ 
+LANGUAGE plpgsql;
+
+SELECT get_data_airlines();
+
+SELECT * FROM get_data_airlines();
+
+
+-- flights table --
+CREATE OR REPLACE FUNCTION get_data_flights()
+RETURNS TABLE (
+    id_flight VARCHAR(10), 
+    id_airline INT, 
+    id_plane INT, 
+    date_time TIMESTAMP WITHOUT TIME ZONE, 
+    origin VARCHAR(45), 
+    destination VARCHAR(45)
+) 
+AS $$
+BEGIN
+    RETURN QUERY EXECUTE 'SELECT * FROM flights;';
+END;
+$$ 
+LANGUAGE plpgsql;
+
+SELECT get_data_flights();
+
+SELECT * FROM get_data_flights();
+
+-- occupations table --
+CREATE OR REPLACE FUNCTION get_data_occupations()
+RETURNS TABLE (
+    id_occu VARCHAR(10), 
+    name VARCHAR(45)
+) 
+AS $$
+BEGIN
+    RETURN QUERY EXECUTE 'SELECT * FROM occupations;';
+END;
+$$ 
+LANGUAGE plpgsql;
+
+SELECT get_data_occupations();
+
+SELECT * FROM get_data_occupations();
+
+-- planes table --
+CREATE OR REPLACE FUNCTION get_data_planes()
+RETURNS TABLE (
+    id_table INT, 
+    model VARCHAR(45), 
+    capacity INT, 
+    id_airline INT
+) 
+AS $$
+BEGIN
+    RETURN QUERY EXECUTE 'SELECT * FROM planes;';
+END;
+$$ 
+LANGUAGE plpgsql;
+
+SELECT get_data_planes();
+
+SELECT * FROM get_data_planes();
+
+-- shops table --
+CREATE OR REPLACE FUNCTION get_data_shops()
+RETURNS TABLE (
+    id_shop INT, 
+    name VARCHAR(45), 
+    num_emp INT, 
+    id_supplier INT
+) 
+AS $$
+BEGIN
+    RETURN QUERY EXECUTE 'SELECT * FROM shops;';
+END;
+$$ 
+LANGUAGE plpgsql;
+
+SELECT get_data_shops();
+
+SELECT * FROM get_data_shops();
+
+-- staff table --
+CREATE OR REPLACE FUNCTION get_data_staff()
+RETURNS TABLE (
+    id_emp INT, 
+    name VARCHAR(45), 
+    surname VARCHAR(45), 
+    id_occu VARCHAR(10), 
+    salary INT, 
+    id_shop INT, 
+    id_airline INT
+) 
+AS $$
+BEGIN
+    RETURN QUERY EXECUTE 'SELECT * FROM staff;';
+END;
+$$ 
+LANGUAGE plpgsql;
+
+SELECT get_data_staff();
+
+SELECT * FROM get_data_staff();
+
+-- suppliers table --
+CREATE OR REPLACE FUNCTION get_data_suppliers()
+RETURNS TABLE (
+    id_supplier INT, 
+    name VARCHAR(45), 
+    company VARCHAR(45)
+) 
+AS $$
+BEGIN
+    RETURN QUERY EXECUTE 'SELECT * FROM suppliers;';
+END;
+$$ 
+LANGUAGE plpgsql;
+
+SELECT get_data_suppliers();
+
+SELECT * FROM get_data_suppliers();
