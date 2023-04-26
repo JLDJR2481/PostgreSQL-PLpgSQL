@@ -27,7 +27,7 @@ END;
 $$;
 
 -- To prove it --
-SELECT * FROM get_large_airlines_name(400);
+-- SELECT * FROM get_large_airlines_name(400); 
 
 
 DROP FUNCTION IF EXISTS get_larger_airlines_data;
@@ -53,7 +53,8 @@ END;
 $$;
 
 -- To prove it:
-SELECT * FROM get_larger_airlines_data(400);
+
+-- SELECT * FROM get_larger_airlines_data(400);
 
 
 -- -----------------------------------------------------
@@ -75,7 +76,8 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- Prove it
-SELECT * FROM get_flights_by_airline_id(1);
+
+-- SELECT * FROM get_flights_by_airline_id(1);
 
 -- -----------------------------------------------------
 -- staff table
@@ -99,20 +101,21 @@ BEGIN
         WHERE id_airline IS NOT NULL;
 
     ELSE
-        RAISE EXCEPTION 'Inserted work_place invalid: %', work_place;
+        RAISE NOTICE 'The work place: % doesn''t exists',work_place;
     END IF;
 END;
 $$ LANGUAGE plpgsql;
 
 
 -- To prove it. We also prove the case insensitive
-SELECT * FROM get_specific_employees('AIRLINES');
 
-SELECT * FROM get_specific_employees('airLiNe');
+-- SELECT * FROM get_specific_employees('AIRLINES'); 
 
-SELECT * FROM get_specific_employees('Shops');
+-- SELECT * FROM get_specific_employees('airLiNe'); 
 
-SELECT * FROM get_specific_employees('Security');
+-- SELECT * FROM get_specific_employees('Shops'); 
+
+-- SELECT * FROM get_specific_employees('Security'); 
 
 
 -- -----------------------------------------------------
@@ -148,7 +151,7 @@ $$ LANGUAGE plpgsql;
 
 
 -- Prove it
-SELECT * FROM get_large_planes(400);
+-- SELECT * FROM get_large_planes(400); 
 
 -- -----------------------------------------------------
 -- shops table
@@ -176,10 +179,10 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- Prove it
-SELECT get_shops_by_range(10,40);
+-- SELECT get_shops_by_range(10,40); 
 
 -- Table form
-SELECT * FROM get_shops_by_range(10,40);
+-- SELECT * FROM get_shops_by_range(10,40); 
 
 -- -----------------------------------------------------
 --  suppliers table
@@ -201,11 +204,11 @@ $$ LANGUAGE plpgsql;
 
 -- To prove it
 
-SELECT * FROM get_initial_j_name();
+-- SELECT * FROM get_initial_j_name(); 
 
-SELECT supplier_id, supplier_name FROM get_initial_j_name();
+-- SELECT supplier_id, supplier_name FROM get_initial_j_name(); 
 
-SELECT get_initial_j_name();
+-- SELECT get_initial_j_name(); 
 
 -- Get data from tables --
 -- Dropping all get_data functions
@@ -231,9 +234,9 @@ END;
 $$ 
 LANGUAGE plpgsql;
 
-SELECT get_data_airlines();
+-- SELECT get_data_airlines();
 
-SELECT * FROM get_data_airlines();
+-- SELECT * FROM get_data_airlines();
 
 
 -- flights table --
@@ -253,9 +256,9 @@ END;
 $$ 
 LANGUAGE plpgsql;
 
-SELECT get_data_flights();
+-- SELECT get_data_flights();
 
-SELECT * FROM get_data_flights();
+-- SELECT * FROM get_data_flights();
 
 -- occupations table --
 CREATE OR REPLACE FUNCTION get_data_occupations()
@@ -270,9 +273,9 @@ END;
 $$ 
 LANGUAGE plpgsql;
 
-SELECT get_data_occupations();
+-- SELECT get_data_occupations();
 
-SELECT * FROM get_data_occupations();
+-- SELECT * FROM get_data_occupations();
 
 -- planes table --
 CREATE OR REPLACE FUNCTION get_data_planes()
@@ -289,9 +292,9 @@ END;
 $$ 
 LANGUAGE plpgsql;
 
-SELECT get_data_planes();
+-- SELECT get_data_planes();
 
-SELECT * FROM get_data_planes();
+-- SELECT * FROM get_data_planes();
 
 -- shops table --
 CREATE OR REPLACE FUNCTION get_data_shops()
@@ -308,9 +311,9 @@ END;
 $$ 
 LANGUAGE plpgsql;
 
-SELECT get_data_shops();
+-- SELECT get_data_shops();
 
-SELECT * FROM get_data_shops();
+-- SELECT * FROM get_data_shops();
 
 -- staff table --
 CREATE OR REPLACE FUNCTION get_data_staff()
@@ -330,9 +333,9 @@ END;
 $$ 
 LANGUAGE plpgsql;
 
-SELECT get_data_staff();
+-- SELECT get_data_staff();
 
-SELECT * FROM get_data_staff();
+-- SELECT * FROM get_data_staff();
 
 -- suppliers table --
 CREATE OR REPLACE FUNCTION get_data_suppliers()
@@ -348,6 +351,6 @@ END;
 $$ 
 LANGUAGE plpgsql;
 
-SELECT get_data_suppliers();
+-- SELECT get_data_suppliers();
 
-SELECT * FROM get_data_suppliers();
+-- SELECT * FROM get_data_suppliers();
