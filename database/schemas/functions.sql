@@ -63,7 +63,9 @@ $$;
 
 DROP FUNCTION IF EXISTS get_flights_by_airline_id;
 
-CREATE OR REPLACE FUNCTION get_flights_by_airline_id(id INT)
+CREATE OR REPLACE FUNCTION get_flights_by_airline_id(
+    id INT
+)
 RETURNS INT AS $$
 DECLARE
     total_flights INT;
@@ -85,8 +87,16 @@ $$ LANGUAGE plpgsql;
 
 DROP FUNCTION IF EXISTS get_specific_employees;
 
-CREATE OR REPLACE FUNCTION get_specific_employees(work_place VARCHAR(8)) 
-RETURNS TABLE(emp_id INTEGER, emp_name VARCHAR(100),emp_salary INTEGER, emp_occu_code VARCHAR(100),work_place_id INTEGER) AS $$
+CREATE OR REPLACE FUNCTION get_specific_employees(
+    work_place VARCHAR(8)
+) 
+RETURNS TABLE(
+    emp_id INTEGER,
+    emp_name VARCHAR(100),
+    emp_salary INTEGER,
+    emp_occu_code VARCHAR(100),
+    work_place_id INTEGER
+) AS $$
 BEGIN
     work_place := LOWER(work_place);
 
@@ -124,8 +134,14 @@ $$ LANGUAGE plpgsql;
 
 DROP FUNCTION IF EXISTS get_large_planes;
 
-CREATE OR REPLACE FUNCTION get_large_planes(min_capacity INTEGER)
-RETURNS TABLE(id INTEGER, plane_model VARCHAR(100), plane_capacity INTEGER) AS $$
+CREATE OR REPLACE FUNCTION get_large_planes(
+    min_capacity INTEGER
+)
+RETURNS TABLE(
+    id INTEGER,
+    plane_model VARCHAR(100),
+    plane_capacity INTEGER
+) AS $$
 DECLARE
     cur_planes CURSOR FOR SELECT id_plane, model, capacity
                           FROM planes
@@ -159,8 +175,15 @@ $$ LANGUAGE plpgsql;
 
 DROP FUNCTION IF EXISTS get_shops_by_range;
 
-CREATE OR REPLACE FUNCTION get_shops_by_range(start_num INTEGER, end_num INTEGER)
-RETURNS TABLE(shop_id INT, shop_name VARCHAR(100), shop_empl INT) AS $$
+CREATE OR REPLACE FUNCTION get_shops_by_range(
+    start_num INTEGER,
+    end_num INTEGER
+)
+RETURNS TABLE(
+    shop_id INT,
+    shop_name VARCHAR(100),
+    shop_empl INT
+) AS $$
 DECLARE
     result RECORD;
 BEGIN
@@ -192,7 +215,11 @@ $$ LANGUAGE plpgsql;
 DROP FUNCTION IF EXISTS get_initial_j_name;
 
 CREATE OR REPLACE FUNCTION get_initial_j_name()
-RETURNS TABLE(supplier_id INT, supplier_name VARCHAR(100), supplier_company VARCHAR(100)) AS $$
+RETURNS TABLE(
+    supplier_id INT,
+    supplier_name VARCHAR(100),
+    supplier_company VARCHAR(100)
+) AS $$
 BEGIN
     RETURN QUERY
     SELECT id_supplier, name, company
