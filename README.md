@@ -93,13 +93,13 @@ select * from function(parameters);
 
 ### Procedures
 
-To execute the functions, write them like this:   
+To execute the procedures, write them like this:   
 
 ```
-call function(parameters);
+call procedure(parameters);
 ```
 
-`function` being the name of the function, and `parameters` being the type of parameters needed by the function (which will be specified below).   
+`procedure` being the name of the procedure, and `parameters` being the type of parameters needed by the procedure (which will be specified below).   
 
 There are three types of procedures: `insert`, `update`, and `delete`.
 
